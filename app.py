@@ -1,15 +1,7 @@
 from flask import Flask, render_template, request, jsonify
-import os
 import base64
-import pdb
-# from flask_cors import CORS
 
 app = Flask(__name__, template_folder='./templates')
-# CORS(app)
-
-# Create shots directory to save pictures
-# if not os.path.exists('./shots'):
-#     os.makedirs('./shots')
 
 @app.route('/')
 def index():
@@ -17,10 +9,8 @@ def index():
 
 @app.route('/snapshot', methods=['POST'])
 def snapshot():
-    # pdb.set_trace()
-    print(request)
     data = request.json
-    image_data = base64.b64decode(data['image'].split(',')[1])
+    image_data = base64.b64decode(data['image'].split(',')[1]) #image data is what gets sent to model
     file_path = f"./shots/fruit.jpg"
     with open(file_path, 'wb') as f:
         f.write(image_data)
