@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import base64
+from main import main
 
 app = Flask(__name__, template_folder='./templates')
 
@@ -14,7 +15,10 @@ def snapshot():
     file_path = f"./shots/fruit.jpg"
     with open(file_path, 'wb') as f:
         f.write(image_data)
-    return jsonify(status="success", file_path=file_path)
+    label, confidence = main(file_path)
+    print(label)
+    print(confidence)
+    return jsonify(status="success", file_path=file_path, label=label, confidence=float(confidence))
 
 if __name__ == '__main__':
     app.run(debug=True)

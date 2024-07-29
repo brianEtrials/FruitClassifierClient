@@ -45,7 +45,11 @@
                 },
                 body: JSON.stringify({'image': data})
             }).then((res) => {
-                console.log(res);
+                return res.json()
+            }).then((data) => {
+                const label = data.label;
+                const confidence = data.confidence;
+                window.alert(`${label}\nConfidence: ${confidence}`);
             }).catch((err) => {
                 console.log(err);
             })
