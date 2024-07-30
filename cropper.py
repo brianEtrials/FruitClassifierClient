@@ -16,7 +16,8 @@ def crop_image(image_path:str|Path, output_dir:str|Path, model_weights:str|Path)
     image = cv2.imread(image_path)
     results = model(image)
 
-    epsilon = 100
+    # epsilon = 100
+    epsilon = 0
     crop_image_paths = list()
     index = 0
     for result in results:

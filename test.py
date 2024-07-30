@@ -11,8 +11,8 @@ def test(test_data_path):
         if os.path.isdir(dir):
             correct = 0
             total = 0
-
             for image_name in os.listdir(dir):
+                print(f"Count: {count}")
                 if image_name.lower().endswith(('.jpg', '.jpeg')):
                     image_path = os.path.join(dir, image_name)
                     predicted_label, confidence = main(image_path)
@@ -22,7 +22,6 @@ def test(test_data_path):
                     if predicted_label == label:
                         correct += 1
                         total_correct += 1
-
             folder_accuracies[label] = correct / total if total > 0 else 0
 
     # Individual  accuracies
@@ -35,5 +34,5 @@ def test(test_data_path):
 
 
 if __name__ == '__main__':
-    test('../Classifier/test_data')
+    test('test_data')
 
