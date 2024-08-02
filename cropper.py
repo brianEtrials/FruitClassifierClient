@@ -12,6 +12,9 @@ def crop_image(image_path:str|Path, output_dir:str|Path, model_weights:str|Path)
     :param model_weights: .pt filepath for model weights
     :return: list of filepaths to cropped images
     """
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
     model = YOLO(model_weights)
     image = cv2.imread(image_path)
     results = model(image)
